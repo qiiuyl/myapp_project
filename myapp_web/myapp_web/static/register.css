@@ -1,0 +1,41 @@
+#header .mint-header{
+    height:2.7rem;
+    background-color:rgb(252, 244, 133);
+    border-radius:2px;
+    color:#363636;
+    font-size:0.8rem;
+}
+#header >>> .mint-button-text{
+    font-weight:600;
+}
+#content .title{
+    height:10rem;
+    box-sizing:border-box;
+    font-size:22px;
+    font-weight: bolder;
+    padding-top:7rem;
+    padding-left:2rem;
+}
+#content input{
+    height:2.5rem;
+    border:0;
+    outline:0;
+    border-bottom:2px solid #ffe971;
+    border-radius:2px;
+    width:80%;
+    font-size:12px;
+    padding-left:1rem;
+    margin-left:2rem;
+    margin-top:3.5rem;
+}
+#footer .mint-button{
+    height:2rem;
+    width:80%;
+    background:#ffe971;
+    margin:6.5rem auto;
+    border-radius:15px;
+    color:#363636;
+    font-weight: bolder;
+    font-size:14px;
+    margin-bottom:0;
+}
