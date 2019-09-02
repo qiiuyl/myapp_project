@@ -32,6 +32,9 @@
 <style scoped src="../../static/register.css">
 </style>
 <style scoped>
+    #content{
+        height:23rem;
+    }
     #content .title span{
         display:block;
         font-size: 10px;
@@ -40,11 +43,11 @@
         padding-left:0.5rem;
         padding-top:0.6rem;
     }
-    #code{
-        width:80%;
+    #content #code{
+        width:90%;
         display: flex;
         justify-content:space-between;
-        margin:0 auto;
+        padding-top:2rem;
     }
     #content #code input{
         width:2.5rem;
@@ -53,11 +56,12 @@
         border-radius:10px;
         background:#e8e8e8;
         text-align:center;
-        line-height: 3rem;
-        padding-left:0;
         font-size: 20px;
         color:#000;
-        margin-left:0;
+    }
+    #footer{
+        height:9rem;
+        padding-top:2rem;
     }
     #footer p{
         cursor: pointer;
@@ -66,7 +70,7 @@
         font-size: 10px;
         font-weight:100;
         color:#888;
-        margin-left:2.5rem;
+        margin-left:1.5rem;
     }
     #footer p span{
         color:#ffe971;

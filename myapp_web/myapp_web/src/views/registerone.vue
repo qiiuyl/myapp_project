@@ -19,3 +19,11 @@
 </template>
 <style src="../../static/register.css" scoped>
 </style>
+<style scoped>
+    #content{
+        height:20rem;
+    }
+    #footer{
+        height:6rem;
+    }
+</style>

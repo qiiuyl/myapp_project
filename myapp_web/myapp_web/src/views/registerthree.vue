@@ -53,17 +53,15 @@ export default {
   }
 }
 </script>
-
-————————————————
-版权声明：本文为CSDN博主「michael_ouyang」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/michael_ouyang/article/details/77556391
-
-
-
-
 <style src="../../static/register.css" scoped>
 </style>
 <style scoped>
+    #content{
+        height:21.5rem;
+    }
+    #footer{
+        height:6rem;
+    }
     #content .title img{
         width:4.5rem;
         height:4.5rem;

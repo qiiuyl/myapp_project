@@ -1,5 +1,6 @@
-#header .mint-header{
-    height:2.7rem;
+/* 注册组件共同的头部样式 */
+#header /deep/ .mint-header{
+    height:3rem;
     background-color:rgb(252, 244, 133);
     border-radius:2px;
     color:#363636;
@@ -8,13 +9,16 @@
 #header >>> .mint-button-text{
     font-weight:600;
 }
-#content .title{
-    height:10rem;
+
+/* 注册组件共同的内容样式 */
+#content{
     box-sizing:border-box;
+    padding-top:8rem;
+    padding-left:2rem;
+}
+#content .title{
     font-size:22px;
     font-weight: bolder;
-    padding-top:7rem;
-    padding-left:2rem;
 }
 #content input{
     height:2.5rem;
@@ -22,20 +26,21 @@
     outline:0;
     border-bottom:2px solid #ffe971;
     border-radius:2px;
-    width:80%;
+    width:90%;
     font-size:12px;
-    padding-left:1rem;
-    margin-left:2rem;
     margin-top:3.5rem;
 }
-#footer .mint-button{
-    height:2rem;
+/* 注册组件共同的脚部样式 */
+#footer{
     width:80%;
+    padding-top:3rem;
+    box-sizing:border-box;
+    margin:0 auto;
+}
+#footer .mint-button{
     background:#ffe971;
-    margin:6.5rem auto;
     border-radius:15px;
     color:#363636;
     font-weight: bolder;
     font-size:14px;
-    margin-bottom:0;
 }
