@@ -2,12 +2,9 @@
     <div>
         <div id="header" fixed>
             <mt-header>
-                <router-link to="/" slot="left">
+                <router-link to="/registertwo" slot="left">
                     <mt-button icon="back"></mt-button>
-                </router-link>
-                <router-link to="/" slot="right">
-                    <mt-button>以后再说</mt-button>
-                </router-link>
+                </router-link> 
             </mt-header>
         </div>
         <div id="content">
@@ -15,10 +12,11 @@
                 <img src="../assets/photo.png" @click="actionSheet">
                 <mt-actionsheet :actions= "data" v-model="sheetVisible"></mt-actionsheet>
             </div>
-            <div class="input"><input type="text" placeholder="用户名" maxlength="10"></div>
+            <div class="input"><input type="text" placeholder="用户名" maxlength="10" :class="input_bg" v-model="user" @blur="reg_username"></div>
         </div>
         <div id="footer">
-            <mt-button size="large">完成注册</mt-button>
+            <mt-button v-if="btn==true" disabled size="large">完成注册</mt-button>
+            <mt-button v-else size="large" @click="next">完成注册</mt-button>
         </div>
     </div>
 </template>
@@ -36,7 +34,13 @@ export default {
         method : this.getLibrary	// 调用methods中的函数
       }],
       // action sheet 默认不显示，为false。操作sheetVisible可以控制显示与隐藏
-      sheetVisible: false
+      sheetVisible: false,
+      input_bg:{
+                   input_background:false,
+                   input_nobackground:true,
+                },
+      user:"",
+      btn:true,
     }
   },
   methods: {
@@ -49,7 +53,21 @@ export default {
     },
     getLibrary: function(){
       console.log("打开相册")
-    }
+    },
+    reg_username(){
+        if(this.user==""){
+            this.input_bg.input_background=false
+            this.input_bg.input_nobackground=true
+            this.$toast("用户名不能为空")
+        }else{
+            this.btn=false
+            this.input_bg.input_background=true
+            this.input_bg.input_nobackground=false
+        }
+    },
+    next(){
+        this.$router.push("/registerone")
+    },
   }
 }
 </script>
@@ -69,5 +87,11 @@ export default {
         display:block;
         padding-left:0.5rem;
         padding-top:0.6rem;
+    }
+    #content .input_background{
+         background:url('../assets/sucess.png') no-repeat 100% 50%;
+    }
+    #content .input_nobackground{
+         background:none;
     }
 </style>

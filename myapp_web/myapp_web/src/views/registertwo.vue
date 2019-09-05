@@ -2,77 +2,70 @@
     <div>
         <div id="header" fixed>
             <mt-header>
-                <router-link to="/" slot="left">
+                <router-link to="/registerone" slot="left">
                     <mt-button icon="back"></mt-button>
-                </router-link>
-                <mt-button slot="right"></mt-button>
+                </router-link>  
             </mt-header>
         </div>
         <div id="content">
-            <div class="title">请输入验证码<span>已发送四位验证码到...</span></div>
-            <div id="code">
-                <input type="text" placeholder="" maxlength="1" v-for="index of sum" :key="index">
+            <div class="title">请输入您的密码</div>
+            <div class="input">
+                <input type="password" placeholder="请输入您的密码" ref="inputMsg" v-model="pwd" @blur="reg_password" :class="input_bg">
             </div>
         </div>
         <div id="footer">
-            <mt-button size="large">下一步</mt-button>
-            <p>重新获取<span> ...秒</span></p>
+            <mt-button v-if="btn==true" disabled size="large">下一步</mt-button>
+            <mt-button v-else size="large" @click="next">下一步</mt-button>
         </div>
     </div>
 </template>
+<style src="../../static/register.css" scoped>
+</style>
+<style scoped>
+    #content{
+        height:20rem;
+    }
+    #footer{
+        height:6rem;
+    }
+    #content .input_background{
+         background:url('../assets/sucess.png') no-repeat 100% 50%;
+    }
+    #content .input_nobackground{
+         background:none;
+    }
+</style>
 <script>
     export default {
         data(){
             return{
-                sum:4,
+                pwd:"",
+                btn:true,
+                input_bg:{
+                   input_background:false,
+                   input_nobackground:true,
+                },
             }
+        },
+        mounted(){
+            this.$refs.inputMsg.focus();
+        },
+        methods:{
+            reg_password(){
+                if(this.pwd==""){
+                    this.input_bg.input_background=false
+                    this.input_bg.input_nobackground=true
+                    this.$toast("密码不能为空")
+                    this.btn=true
+                }else{
+                    this.btn=false
+                    this.input_bg.input_background=true
+                    this.input_bg.input_nobackground=false
+                }
+            },
+            next(){
+                this.$router.push("/registerthree")
+            },
         }
     }
 </script>
-<style scoped src="../../static/register.css">
-</style>
-<style scoped>
-    #content{
-        height:23rem;
-    }
-    #content .title span{
-        display:block;
-        font-size: 10px;
-        font-weight:100;
-        color:#888;
-        padding-left:0.5rem;
-        padding-top:0.6rem;
-    }
-    #content #code{
-        width:90%;
-        display: flex;
-        justify-content:space-between;
-        padding-top:2rem;
-    }
-    #content #code input{
-        width:2.5rem;
-        height:3rem;
-        border:0;
-        border-radius:10px;
-        background:#e8e8e8;
-        text-align:center;
-        font-size: 20px;
-        color:#000;
-    }
-    #footer{
-        height:9rem;
-        padding-top:2rem;
-    }
-    #footer p{
-        cursor: pointer;
-        display:block;
-        text-align:none;
-        font-size: 10px;
-        font-weight:100;
-        color:#888;
-        margin-left:1.5rem;
-    }
-    #footer p span{
-        color:#ffe971;
-    }
-</style>
