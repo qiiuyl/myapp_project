@@ -19,5 +19,12 @@ router.get("/kingkong",(req,res)=>{
     res.send(result);
   })
 })
+//添加访问act的路由
+router.get("/act",(req,res)=>{
+  var sql="SELECT s_id,s_name,s_decribe FROM product_status"
+  pool.query(sql,(err,result)=>{
+    res.send(result);
+  })
+})
 //导出路由器对象
 module.exports=router;

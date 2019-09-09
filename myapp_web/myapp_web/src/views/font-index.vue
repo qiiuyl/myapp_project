@@ -11,35 +11,30 @@
     <div id="clear"></div><!--为了解决因为fixed对banner造成的影响-->
     <div id="banner">
         <mt-swipe :auto="4000">
-          <mt-swipe-item><img src="../assets/index/c1.png" alt="轮播图"></mt-swipe-item>
-          <mt-swipe-item><img src="../assets/index/c2.png" alt="轮播图"></mt-swipe-item>
-          <mt-swipe-item><img src="../assets/index/c3.png" alt="轮播图"></mt-swipe-item>
+          <mt-swipe-item v-for="(item,index) of banner_img" :key=index>
+            <img :src=banner_img[index].img :alt=banner_img[index].title></mt-swipe-item>
         </mt-swipe>
     </div>
     <div id="kingkong">
       <ul class="kingkong_ul">
-        <li><img src="../assets/index/kingkong_01.png" alt=""><p>品质猫粮</p></li>
-        <li><img src="../assets/index/kingkong_02.png" alt=""><p>优选罐头</p></li>
-        <li><img src="../assets/index/kingkong_03.png" alt=""><p>厕所猫砂</p></li>
-        <li><img src="../assets/index/kingkong_04.png" alt=""><p>清洁护理</p></li>
-        <li><img src="../assets/index/kingkong_05.png" alt=""><p>玩具服饰</p></li>
-        <li><img src="../assets/index/kingkong_06.png" alt=""><p>猫窝爬架</p></li>
-        <li><img src="../assets/index/kingkong_07.png" alt=""><p>日常用品</p></li>
-        <li><img src="../assets/index/kingkong_08.png" alt=""><p>医疗保健</p></li>
+        <li v-for="(item,index) of kingkong" :key=index>
+          <img :src=kingkong[index].icon :alt=kingkong[index].pb_tname>
+          <p>{{kingkong[index].pb_tname}}</p>
+        </li>
       </ul>
     </div>
     <div id="activity">
       <div id="activity_left">
-        <h6>品质限时购</h6><span class="time">23:59:59</span>
+        <h6>{{(act[0].s_name)}}</h6><span class="time">{{act[0].s_decribe}}</span>
         <img src="../assets/index/activity_01.png" alt="商品图"/>
       </div>
       <div id="activity_right">
         <div>
-          <h6>免费试吃</h6><span>小样免费申领</span>
+          <h6>{{(act[1].s_name)}}</h6><span>{{act[1].s_decribe}}</span>
           <img src="../assets/index/activity_02.png" alt="商品图"/>
           </div>
         <div>
-          <h6>临期特惠</h6><span>褥羊毛就在这里</span>
+          <h6>{{(act[2].s_name)}}</h6><span>{{act[2].s_decribe}}</span>
           <img src="../assets/index/activity_03.png" alt="商品图"/>
           </div>
       </div>
@@ -126,11 +121,13 @@
         ml:0,
         banner_img:[],
         kingkong:[],
+        act:[],
       }
     },
     created(){
       this.getbanner();
       this.getkingkong();
+      this.getactivity();
     },
     methods:{
       onSwipeLeft(){
@@ -164,15 +161,20 @@
       getbanner(){
         var url="/product/banner";
         this.axios.get(url).then(res=>{
-          this.banner_img.push(res.data);
-          console.log(this.banner_img[0][0].img)
+          this.banner_img=this.banner_img.concat(res.data)
         })
       },
       getkingkong(){
         var url="/product/kingkong";
         this.axios.get(url).then(res=>{
-          this.kingkong.push(res.data);
-          console.log(this.kingkong);
+          this.kingkong=this.kingkong.concat(res.data);
+        })
+      },
+      getactivity(){
+        var url="/product/act";
+        this.axios.get(url).then(res=>{
+          this.act=this.act.concat(res.data)
+          console.log(this.act[0].s_name)
         })
       }
     }
@@ -320,13 +322,13 @@
     font-weight: 600;
   }
   #activity #activity_left img{
-    width:80%;
+    width:8.5rem;
     position:absolute;
     top:30%;
     left:15%;
   }
   #activity #activity_right img{
-    width:35%;
+    width:3.5rem;
     position:absolute;
     top:43%;
     left:53%;

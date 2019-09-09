@@ -27,6 +27,7 @@ app.use(session({
    resave:true,            //#每次请求保存数据 
    saveUninitialized:true  //#保存初始化数据
 }));
+app.use(express.static("public"));
 //使用body-parser中间件
 app.use(bodyParser.urlencoded({
   extended:false

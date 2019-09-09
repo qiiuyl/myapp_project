@@ -152,24 +152,23 @@ CREATE TABLE index_carousel(
   title VARCHAR(64)
 );
 
-
 /****数据导入****/
 INSERT INTO user VALUES
 (NULL, 'dingding', '123456', '13501234567','4100','img/avatar/default.png', '丁伟', '1'),
 (NULL, 'dangdang', '123456', '13501234568','1200','img/avatar/default.png', '林当', '0');
 INSERT INTO index_carousel VALUES
-(NULL, '../assets/index/c1.png','轮播广告商品1'),
-(NULL, '../assets/index/c2.png','轮播广告商品2'),
-(NULL, '../assets/index/c3.png','轮播广告商品3');
+(NULL, 'http://127.0.0.1:8080/index/c1.png','轮播广告商品1'),
+(NULL, 'http://127.0.0.1:8080/index/c2.png','轮播广告商品2'),
+(NULL, 'http://127.0.0.1:8080/index/c3.png','轮播广告商品3');
 INSERT INTO product_bigtype VALUES
-(10,"品质猫粮","../assets/index/kingkong_01.png"),
-(20,"优选罐头","../assets/index/kingkong_02.png"),
-(30,"厕所猫砂","../assets/index/kingkong_03.png"),
-(40,"清洁护理","../assets/index/kingkong_04.png"),
-(50,"玩具服饰","../assets/index/kingkong_05.png"),
-(60,"猫窝爬架","../assets/index/kingkong_06.png"),
-(70,"日常用品","../assets/index/kingkong_07.png"),
-(80,"医疗保健","../assets/index/kingkong_08.png");
+(10,"品质猫粮","http://127.0.0.1:8080/index/kingkong_01.png"),
+(20,"优选罐头","http://127.0.0.1:8080/index/kingkong_02.png"),
+(30,"厕所猫砂","http://127.0.0.1:8080/index/kingkong_03.png"),
+(40,"清洁护理","http://127.0.0.1:8080/index/kingkong_04.png"),
+(50,"玩具服饰","http://127.0.0.1:8080/index/kingkong_05.png"),
+(60,"猫窝爬架","http://127.0.0.1:8080/index/kingkong_06.png"),
+(70,"日常用品","http://127.0.0.1:8080/index/kingkong_07.png"),
+(80,"医疗保健","http://127.0.0.1:8080/index/kingkong_08.png");
 INSERT INTO product_status VALUES
 (101,"品质限时购","23:59:59"),
 (102,"免费试吃","小样免费申领"),
@@ -208,38 +207,38 @@ INSERT INTO product_smalltype VALUES
 (NULL,"猫爬架",70),
 (NULL,"驱虫药",80);
 INSERT INTO product_brand VALUES
-(10,"美滋元","美国","../assets/country/mg.png",10),
-(NULL,"凯锐思","中国","../assets/country/zg.png",10),
-(NULL,"亿迪","中国","../assets/country/zg.png",10),
-(NULL,"麦富迪","日本","../assets/country/rb.png",20),
-(NULL,"希宝","泰国","../assets/country/tg.png",20),
-(NULL,"猫森林","中国","../assets/country/zg.png",30),
-(NULL,"耐威克","中国","../assets/country/zg.png",30),
-(NULL,"西西猫","美国","../assets/country/mg.png",30),
-(NULL,"逸诺","马来西亚","../assets/country/mlxy.png",40),
-(NULL,"Petio","韩国","../assets/country/hg.png",50),
-(NULL,"贵为","中国","../assets/country/zg.png",50),
-(NULL,"ZEZE","美国","../assets/country/mg.png",60),
-(NULL,"NINNIE","英国","../assets/country/yg.png",60),
-(NULL,"TOM CAT","西班牙","../assets/country/xby.png",70),
-(NULL,"Hoopet/华元宠具","中国","../assets/country/zg.png",70),
-(NULL,"LIADE","美国","../assets/country/mg.png",80);
+(10,"美滋元","美国","http://127.0.0.1:8080/country/mg.png",10),
+(NULL,"凯锐思","中国","http://127.0.0.1:8080/country/zg.png",10),
+(NULL,"亿迪","中国","http://127.0.0.1:8080/country/zg.png",10),
+(NULL,"麦富迪","日本","http://127.0.0.1:8080/country/rb.png",20),
+(NULL,"希宝","泰国","http://127.0.0.1:8080/country/tg.png",20),
+(NULL,"猫森林","中国","http://127.0.0.1:8080/country/zg.png",30),
+(NULL,"耐威克","中国","http://127.0.0.1:8080/country/zg.png",30),
+(NULL,"西西猫","美国","http://127.0.0.1:8080/country/mg.png",30),
+(NULL,"逸诺","马来西亚","http://127.0.0.1:8080/country/mlxy.png",40),
+(NULL,"Petio","韩国","http://127.0.0.1:8080/country/hg.png",50),
+(NULL,"贵为","中国","http://127.0.0.1:8080/country/zg.png",50),
+(NULL,"ZEZE","美国","http://127.0.0.1:8080/country/mg.png",60),
+(NULL,"NINNIE","英国","http://127.0.0.1:8080/country/yg.png",60),
+(NULL,"TOM CAT","西班牙","http://127.0.0.1:8080/country/xby.png",70),
+(NULL,"Hoopet/华元宠具","中国","http://127.0.0.1:8080/country/zg.png",70),
+(NULL,"LIADE","美国","http://127.0.0.1:8080/country/mg.png",80);
 INSERT INTO product VALUES
-(1,"蜜蜂款猫窝","9.9","19.9","../assets/index/pro_01.png",124,104,21),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,101,10),
-(NULL,"泰国原装金枪鱼罐头","120.0","120.0","../assets/index/pro_01.png",107,104,14),
-(NULL,"香薰味猫砂","64.5","64.5","../assets/index/pro_01.png",110,105,15),
-(NULL,"猫猫掏耳朵神器","26","26","../assets/index/pro_01.png",104,102,18),
-(NULL,"可爱猫猫小背心","77","77","../assets/index/pro_01.png",117,104,19),
-(NULL,"猫猫可爱爬架","64.22","64.22","../assets/index/pro_01.png",126,103,21),
-(NULL,"有趣逗猫棒","71","71","../assets/index/pro_01.png",127,103,23),
-(NULL,"猫猫强力驱虫药","35.6","35.6","../assets/index/pro_01.png",130,104,25),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,104,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,104,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,104,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10),
-(NULL,"西西猫猫粮","45.9","45.9","../assets/index/pro_01.png",101,105,10);
+(1,"蜜蜂款猫窝","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,101,10),
+(NULL,"泰国原装金枪鱼罐头","120.0","120.0","http://127.0.0.1:8080/index/pro_01.png",107,104,14),
+(NULL,"香薰味猫砂","64.5","64.5","http://127.0.0.1:8080/index/pro_01.png",110,105,15),
+(NULL,"猫猫掏耳朵神器","26","26","http://127.0.0.1:8080/index/pro_01.png",104,102,18),
+(NULL,"可爱猫猫小背心","77","77","http://127.0.0.1:8080/index/pro_01.png",117,104,19),
+(NULL,"猫猫可爱爬架","64.22","64.22","http://127.0.0.1:8080/index/pro_01.png",126,103,21),
+(NULL,"有趣逗猫棒","71","71","http://127.0.0.1:8080/index/pro_01.png",127,103,23),
+(NULL,"猫猫强力驱虫药","35.6","35.6","http://127.0.0.1:8080/index/pro_01.png",130,104,25),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,104,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,104,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,104,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10),
+(NULL,"西西猫猫粮","45.9","45.9","http://127.0.0.1:8080/index/pro_01.png",101,105,10);
