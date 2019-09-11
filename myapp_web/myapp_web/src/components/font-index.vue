@@ -4,8 +4,8 @@
       <div class="big_font">首页推荐</div>
       <div id="img">
         <input type="text" placeholder="搜索" ref="inputMsg">
-        <img class="search" src="../assets/search.png" alt="">
-        <img src="../assets/info.png" alt="">
+        <img class="search" src="http://127.0.0.1:8080/index/search.png" alt="">
+        <img src="http://127.0.0.1:8080/index/info.png" alt="">
       </div>
     </div>
     <div id="clear"></div><!--为了解决因为fixed对banner造成的影响-->
@@ -23,20 +23,20 @@
         </li>
       </ul>
     </div>
-    <div id="activity">
+    <div id="activity" v-if="act.length>0 && act_product.length>0">
       <div id="activity_left">
         <h6>{{(act[0].s_name)}}</h6><span class="time">{{act[0].s_decribe}}</span>
-        <img src="../assets/index/activity_01.png" alt="商品图"/>
+        <img :src=act_product[0].p_img alt="商品图"/>
       </div>
       <div id="activity_right">
         <div>
           <h6>{{(act[1].s_name)}}</h6><span>{{act[1].s_decribe}}</span>
-          <img src="../assets/index/activity_02.png" alt="商品图"/>
-          </div>
+          <img :src=act_product[1].p_img alt="商品图"/>
+        </div>
         <div>
           <h6>{{(act[2].s_name)}}</h6><span>{{act[2].s_decribe}}</span>
-          <img src="../assets/index/activity_03.png" alt="商品图"/>
-          </div>
+          <img :src=act_product[2].p_img alt="商品图"/>
+        </div>
       </div>
     </div>
     <div id="good_product">
@@ -44,36 +44,12 @@
         <div id="product">
           <v-touch v-on:swipeleft="onSwipeLeft" v-on:swiperight="onSwipeRight">
             <div id="product_item" ref="product_item">
-              <div id="item_content">
-                <img src="../assets/index/pro_01.png" alt="">
+              <div id="item_content" v-for="(item,index) of good_product" :key="index">
+                <img :src=good_product[index].p_img alt="">
                 <div id="content">
-                  <p>蜜蜂款猫窝</p>
-                  <span>“可可爱爱想睡觉的猫窝”</span>
-                  <p><span>￥9.9</span><span class="price">￥19.9</span></p>
-                </div>
-              </div>
-              <div id="item_content">
-                <img src="../assets/index/pro_01.png" alt="">
-                <div id="content">
-                  <p>蜜蜂款猫窝</p>
-                  <span>“可可爱爱想睡觉的猫窝”</span>
-                  <p><span>￥9.9</span><span class="price">￥19.9</span></p>
-                </div>
-              </div>
-              <div id="item_content">
-                <img src="../assets/index/pro_01.png" alt="">
-                <div id="content">
-                  <p>蜜蜂款猫窝</p>
-                  <span>“可可爱爱想睡觉的猫窝”</span>
-                  <p><span>￥9.9</span><span class="price">￥19.9</span></p>
-                </div>
-              </div>
-              <div id="item_content">
-                <img src="../assets/index/pro_01.png" alt="">
-                <div id="content">
-                  <p>蜜蜂款猫窝</p>
-                  <span>“可可爱爱想睡觉的猫窝”</span>
-                  <p><span>￥9.9</span><span class="price">￥19.9</span></p>
+                  <p>{{good_product[index].p_name}}</p>
+                  <span>{{good_product[index].p_secondname}}</span>
+                  <p><span>￥{{good_product[index].p_pastprice}}</span><span class="price">￥{{good_product[index].p_price}}</span></p>
                 </div>
               </div>
             </div>
@@ -84,30 +60,10 @@
         <h5>猜你喜欢</h5>
         <v-touch v-on:swipeleft="onSwipeLeft1" v-on:swiperight="onSwipeRight1">
           <div id="like_list" ref="like_list">
-            <div id="like_item">
-              <img src="../assets/index/like_01.png" alt="">
-              <span>【Royal Canin】幼猫粮 2kg</span>
-              <p><span>￥</span>128</p>
-            </div>
-            <div id="like_item">
-              <img src="../assets/index/like_01.png" alt="">
-              <span>【Royal Canin】幼猫粮 2kg</span>
-              <p><span>￥</span>128</p>
-            </div>
-            <div id="like_item">
-              <img src="../assets/index/like_01.png" alt="">
-              <span>【Royal Canin】幼猫粮 2kg</span>
-              <p><span>￥</span>128</p>
-            </div>
-            <div id="like_item">
-              <img src="../assets/index/like_01.png" alt="">
-              <span>【Royal Canin】幼猫粮 2kg</span>
-              <p><span>￥</span>128</p>
-            </div>
-            <div id="like_item">
-              <img src="../assets/index/like_01.png" alt="">
-              <span>【Royal Canin】幼猫粮 2kg</span>
-              <p><span>￥</span>128</p>
+            <div id="like_item" v-for="(item,index) of like_product " :key="index">
+              <img :src=like_product[index].p_img alt=like_product[index].p_title>
+              <span>{{like_product[index].p_name}}</span>
+              <p><span>￥</span>{{like_product[index].p_price}}</p>
             </div>
           </div>
         </v-touch>
@@ -122,12 +78,18 @@
         banner_img:[],
         kingkong:[],
         act:[],
+        act_product:[],
+        good_product:[],
+        like_product:[],
       }
     },
     created(){
       this.getbanner();
       this.getkingkong();
       this.getactivity();
+      this.getactivity_product();
+      this.getgood_product();
+      this.getlike_product();
     },
     methods:{
       onSwipeLeft(){
@@ -168,13 +130,30 @@
         var url="/product/kingkong";
         this.axios.get(url).then(res=>{
           this.kingkong=this.kingkong.concat(res.data);
-        })
+        })                                                                                                                                                                                                                                                        
       },
       getactivity(){
         var url="/product/act";
         this.axios.get(url).then(res=>{
           this.act=this.act.concat(res.data)
-          console.log(this.act[0].s_name)
+        })
+      },
+      getactivity_product(){
+        var url="/product/act_product";
+        this.axios.get(url).then(res=>{
+          this.act_product=this.act_product.concat(res.data)
+        })
+      },
+      getgood_product(){
+        var url="/product/good_product";
+        this.axios.get(url).then(res=>{
+          this.good_product=this.good_product.concat(res.data)
+        })
+      },
+      getlike_product(){
+        var url="/product/like_product";
+        this.axios.get(url).then(res=>{
+          this.like_product=this.like_product.concat(res.data)
         })
       }
     }

@@ -26,5 +26,44 @@ router.get("/act",(req,res)=>{
     res.send(result);
   })
 })
+//访问处于活动状态的商品信息
+router.get("/act_product",(req,res)=>{
+  var sql="SELECT p_id,p_name,p_price,p_pastprice,p_img FROM product WHERE p_status=101 OR p_status=102 OR p_status=103"
+  pool.query(sql,(err,result)=>{
+    res.send(result);
+  })
+})
+//访问处于好物说状态的商品信息
+router.get("/good_product",(req,res)=>{
+  var sql="SELECT p_id,p_name,p_secondname,p_price,p_pastprice,p_img FROM product WHERE p_status=104"
+  pool.query(sql,(err,result)=>{
+    res.send(result);
+  })
+})
+//访问处于猜你喜欢状态的商品信息
+router.get("/like_product",(req,res)=>{
+  var sql="SELECT p_id,p_name,p_price,p_pastprice,p_img FROM product WHERE p_status=105"
+  pool.query(sql,(err,result)=>{
+    res.send(result);
+  })
+})
+//查询小类别的商品
+router.get("/smalltype",(req,res)=>{
+  var name=req.query.name
+  var sql="SELECT ps_tid,ps_tname,ps_icon FROM product_smalltype,product_bigtype WHERE pb_id=pb_tid AND pb_tname=?"
+  pool.query(sql,[name],(err,result)=>{
+    if(err)throw err;
+    res.send(result);
+  })
+})
+//查询商品的品牌
+router.get("/brand",(req,res)=>{
+  var name=req.query.name
+  var sql="SELECT pc_id,pc_name,pc_img FROM product_brand,product_bigtype WHERE pbpc_tid=pb_tid AND pb_tname=?"
+  pool.query(sql,[name],(err,result)=>{
+    if(err)throw err;
+    res.send(result);
+  })
+})
 //导出路由器对象
 module.exports=router;

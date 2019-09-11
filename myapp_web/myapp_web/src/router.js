@@ -5,8 +5,9 @@ import registerone from './views/registerone.vue'
 import registertwo from './views/registertwo.vue'
 import registerthree from './views/registerthree.vue'
 import login from './views/login.vue'
-import fontindex from './views/font-index.vue'
 import index from './views/index.vue'
+import search from './views/search.vue'
+import product_item from './components/product_item.vue'
 
 Vue.use(Router)
 
@@ -17,7 +18,8 @@ export default new Router({
     {path: '/registertwo',component:registertwo},
     {path: '/registerthree',component:registerthree},
     {path: '/login',component:login},
-    {path: '/fontindex',component:fontindex},
     {path: '/index',component:index},
+    {path: '/search',component:search},
+    {path: '/productItem',component:product_item}
   ]
 })
