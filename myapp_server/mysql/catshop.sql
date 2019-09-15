@@ -50,6 +50,7 @@ CREATE TABLE product(
   st_id INT ,                            #商品所属小类别st_id
   p_status INT ,                         #商品的状态id(属于促销还是别的状态)
   p_brand INT ,                #商品所属的品牌编号
+  p_discount BOOLEAN,          #商品是否是折扣期
   FOREIGN KEY(p_status) REFERENCES product_status(s_id)
 );
 alter table product add foreign key(st_id) references product_smalltype(ps_tid);
@@ -228,21 +229,21 @@ INSERT INTO product_brand VALUES
 (NULL,"LIADE","http://127.0.0.1:8080/brand/brand01.png","美国","http://127.0.0.1:8080/country/mg.png",80);
 
 INSERT INTO product VALUES
-(1,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21),
-(NULL,"西西猫猫粮","可可爱爱想睡觉","45.9","45.9","http://127.0.0.1:8080/index/activity_01.png",101,101,10),
-(NULL,"奶油味猫粮","可可爱爱想睡觉","66","66","http://127.0.0.1:8080/index/activity_02.png",101,102,10),
-(NULL,"泰国原装金枪鱼罐头","可可爱爱想睡觉","120.0","120.0","http://127.0.0.1:8080/index/activity_03.png",107,103,14),
-(NULL,"香薰味猫砂","可可爱爱想睡觉","64.5","64.5","http://127.0.0.1:8080/index/pro_01.png",110,NULL,15),
-(NULL,"猫猫掏耳朵神器","可可爱爱想睡觉","26","26","http://127.0.0.1:8080/index/pro_01.png",104,NULL,18),
-(NULL,"可爱猫猫小背心","可可爱爱想睡觉","77","77","http://127.0.0.1:8080/index/pro_01.png",117,NULL,19),
-(NULL,"猫猫可爱爬架","可可爱爱想睡觉","64.22","64.22","http://127.0.0.1:8080/index/pro_01.png",126,NULL,21),
-(NULL,"有趣逗猫棒","可可爱爱想睡觉","71","71","http://127.0.0.1:8080/index/pro_01.png",127,NULL,23),
-(NULL,"猫猫强力驱虫药","可可爱爱想睡觉","35.6","35.6","http://127.0.0.1:8080/index/pro_01.png",130,NULL,25),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10);
+(1,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
+(NULL,"西西猫猫粮","可可爱爱想睡觉","45.9","45.9","http://127.0.0.1:8080/index/activity_01.png",101,101,10,true),
+(NULL,"奶油味猫粮","可可爱爱想睡觉","66","66","http://127.0.0.1:8080/index/activity_02.png",101,102,10,false),
+(NULL,"泰国原装金枪鱼罐头","可可爱爱想睡觉","120.0","120.0","http://127.0.0.1:8080/index/activity_03.png",107,103,14,false),
+(NULL,"香薰味猫砂","可可爱爱想睡觉","64.5","64.5","http://127.0.0.1:8080/index/pro_01.png",110,NULL,15,true),
+(NULL,"猫猫掏耳朵神器","可可爱爱想睡觉","26","26","http://127.0.0.1:8080/index/pro_01.png",104,NULL,18,false),
+(NULL,"可爱猫猫小背心","可可爱爱想睡觉","77","77","http://127.0.0.1:8080/index/pro_01.png",117,NULL,19,true),
+(NULL,"猫猫可爱爬架","可可爱爱想睡觉","64.22","64.22","http://127.0.0.1:8080/index/pro_01.png",126,NULL,21,true),
+(NULL,"有趣逗猫棒","可可爱爱想睡觉","71","71","http://127.0.0.1:8080/index/pro_01.png",127,NULL,23,false),
+(NULL,"猫猫强力驱虫药","可可爱爱想睡觉","35.6","35.6","http://127.0.0.1:8080/index/pro_01.png",130,NULL,25,true),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,false),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false);

@@ -65,5 +65,14 @@ router.get("/brand",(req,res)=>{
     res.send(result);
   })
 })
+//查询带关键词的商品
+router.get("/product",(req,res)=>{
+  var keyword=req.query.keyword;
+  var sql="SELECT p_id,p_name,p_price,p_img,p_discount,p_brand,pc_country,pc_icon FROM product,product_brand WHERE p_brand=pc_id AND p_name LIKE ?"
+  pool.query(sql,[`%${keyword}%`],(err,result)=>{
+    if(err)throw err;
+    res.send(result);
+  })
+})
 //导出路由器对象
 module.exports=router;
