@@ -29,7 +29,6 @@
         }
     }
 </script>
-<style src="../../static/register.css" scoped>
 </style>
 <style scoped>
     #content{

@@ -7,7 +7,6 @@
         <li><img src="http://127.0.0.1:8080/search/search.png" alt=""></li>
       </ul>
     </div>
-    <div id="clear"></div>
     <div id="nav">
       <ul ref="navUL">
         <li v-for="(item,index) of list" :key=index>
@@ -20,9 +19,14 @@
         </li>
       </ul>
     </div>
+    <div id="clear"></div>
+    <div>
+      <productlist></productlist>
+    </div>
   </div>
 </template>
 <script>
+import productlist from '../components/product_list.vue';
 export default {
   name: 'search',
   data(){
@@ -51,6 +55,9 @@ export default {
       }
     }
   },
+  components:{
+    productlist,
+  },
   mounted(){
     this.$refs.inputMsg.focus();
   },
@@ -71,6 +78,14 @@ export default {
     height:3rem;
     background:#ffe971;
     position:fixed;
+    z-index:2;
+  }
+  #nav{
+    position:fixed;
+    top:3rem;
+    z-index:2;
+    background:#fff;
+    margin-bottom:0.8rem;
   }
   #header ul{
     width:100%;
@@ -99,7 +114,7 @@ export default {
     padding-left:0.5rem;
   }
   #clear{
-    height:3rem;
+    height:4rem;
   }
   #nav{
     width:100%;

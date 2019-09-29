@@ -1,0 +1,24 @@
+*{
+    box-sizing: border-box;
+}
+/* 商品小标题 */
+.product-smallfont{
+    font-size:0.75rem; 
+    color:#333;
+}
+/* 商品大标题 */
+.product-bigfont{
+    font-size:1rem;
+    font-weight:600;
+}
+/* 商品展示的价格 */
+.product-price{
+    font-size:1.5rem;
+    font-weight:600;
+}
+/* 商品描述 */
+.product-describe{
+    font-size:0.75rem;
+    color:#888;
+}
+

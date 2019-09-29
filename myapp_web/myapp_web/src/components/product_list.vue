@@ -1,6 +1,11 @@
 <template>
   <div id="container">
     <productItem></productItem>
+    <productItem></productItem>
+    <productItem></productItem>
+    <productItem></productItem>
+    <productItem></productItem>
+    <productItem></productItem>
   </div>
 </template>
 <script>
