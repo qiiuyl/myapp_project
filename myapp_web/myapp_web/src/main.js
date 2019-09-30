@@ -26,6 +26,9 @@ axios.defaults.baseURL="http://127.0.0.1:8080"
 //注册
 Vue.prototype.axios=axios;//前面的vue必须大写
 
+import { NavBar } from 'vant';
+Vue.use(NavBar);
+
 Vue.config.productionTip = false
 
 new Vue({
