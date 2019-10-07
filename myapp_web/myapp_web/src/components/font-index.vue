@@ -3,9 +3,8 @@
     <div id="header">
       <div class="big_font">首页推荐</div>
       <div id="img">
-        <input type="text" placeholder="搜索" ref="inputMsg">
-        <img class="search" src="http://127.0.0.1:8080/index/search.png" alt="">
-        <img src="http://127.0.0.1:8080/index/info.png" alt="">
+        <router-link to="search"><img class="search" src="http://127.0.0.1:8080/index/search.png" alt=""></router-link>
+        <router-link to="search"><img src="http://127.0.0.1:8080/index/info.png" alt=""></router-link>
       </div>
     </div>
     <div id="clear"></div><!--为了解决因为fixed对banner造成的影响-->
@@ -198,18 +197,8 @@
     height:25px;
     padding-left:0.3rem;
   }
-  #header #img img+img{
-    padding-left:1rem;
-  }
-  #header #img input{
-    display:none;
-    height:40%;
-    border-radius:10px;
-    border:2px solid #FFEC8B;
-    outline:none;
-    padding-left:0.5rem;
-    font-size: 12px;
-    color:#999;
+  #header #img a+a{
+    padding-left:0.8rem;
   }
   #clear{
     height:3.5rem;

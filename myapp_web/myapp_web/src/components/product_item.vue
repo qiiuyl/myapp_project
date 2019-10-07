@@ -3,12 +3,12 @@
     <table></table>
     <div id="product_item">
       <div id="item_img">
-        <img src="http://127.0.0.1:8080/type/type_01.png" alt />
+        <img :src="item.p_img" alt />
       </div>
       <div id="content">
-        <h6>【Acana】 爱肯拿无谷鸡肉鱼配方全猫粮 1.8kg</h6>
+        <h6>{{item.p_name}}</h6>
         <div id="head">
-          <p id="discount">折扣</p>
+          <p id="discount" :style="{'opacity':item.p_discount==1?'9':'0'}">折扣</p>
           <p id="shopcar">
             <button>
               <img src="http://127.0.0.1:8080/search/shopcar.png" alt />
@@ -16,27 +16,39 @@
           </p>
         </div>
         <p id="price">
-          <span>￥</span>228
-          <span>￥63.33/500g</span>
+          <span>￥</span>{{(item.p_price).toFixed(2)}}
+          <span>￥{{monovalent.toFixed(2)}}/500g</span>
+          <!-- 采用计算属性获得 -->
         </p>
         <div id="bottom">
           <p>
-            <img src="http://127.0.0.1:8080/country/hg.png" alt />
-            <span>韩国原装进口</span>
+            <img :src="item.pc_icon" alt />
+            <span>原产地:{{item.pc_country}}</span>
           </p>
           <p>
             <img src="http://127.0.0.1:8080/search/client.png" alt />
-            <span>228人已购买</span>
+            <span>{{item.p_buypeople}}人已购买</span>
           </p>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  props:['item','index'],
+  computed:{
+    monovalent(){//根据总价来计算每500g价格是多少
+      var price=this.item.p_price;
+      return price/2;
+    }
+  }
+}
+</script>
 <style scoped>
 #item_container {
   width: 95%;
-  margin: 1rem auto;
+  margin: 1.3rem auto;
   background: #fff;
   border-radius: 1rem;
 }
@@ -64,13 +76,13 @@
   box-sizing:border-box;
 }
 #product_item #content h6 {
-  width: 100%;
-  height: 20%;
+  width: 90%;
+  /* height: 20%; */
   margin: 0;
   padding: 0;
   color: #444;
 }
-#product_item #content #head {
+#product_item #content #head{
   width: 100%;
   height: 30%;
   display: flex;

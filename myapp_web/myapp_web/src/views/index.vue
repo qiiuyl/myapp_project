@@ -12,7 +12,7 @@
           购物车
        </mt-tab-container-item>
        <mt-tab-container-item id="myself">
-          我的
+          <my></my>
        </mt-tab-container-item>
     </mt-tab-container>
     <div id="footer">
@@ -40,6 +40,7 @@
 <script>
   import fontindex from '../components/font-index.vue'
   import type from '../components/type.vue'
+  import my from '../components/my.vue'
   export default{
     data(){
       return{
@@ -48,7 +49,8 @@
     },
     components:{
       fontindex,
-      type
+      type,
+      my
     }
   }
 </script>

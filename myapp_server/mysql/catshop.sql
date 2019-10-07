@@ -44,13 +44,14 @@ CREATE TABLE product(
   p_id INT PRIMARY KEY AUTO_INCREMENT ,  #产品编号
   p_name VARCHAR(100) ,                  #产品名称
   p_secondname VARCHAR(100),             #产品临时说明，用于好物说
-  p_price DECIMAL(10,2) ,		            #产品价格
+  p_price DECIMAL(10,2) ,		            #产品打折后价格
   p_pastprice DECIMAL(10,2),            #商品旧价格，用于好物说
   p_img  VARCHAR(128) ,		              #产品图片
   st_id INT ,                            #商品所属小类别st_id
   p_status INT ,                         #商品的状态id(属于促销还是别的状态)
-  p_brand INT ,                #商品所属的品牌编号
-  p_discount BOOLEAN,          #商品是否是折扣期
+  p_brand INT ,                         #商品所属的品牌编号
+  p_discount BOOLEAN,                   #商品是否是折扣期
+  p_buypeople  INT,                      #商品购买人数
   FOREIGN KEY(p_status) REFERENCES product_status(s_id)
 );
 alter table product add foreign key(st_id) references product_smalltype(ps_tid);
@@ -75,11 +76,11 @@ CREATE TABLE user(
   uid INT PRIMARY KEY AUTO_INCREMENT,  #用户的编号
   uname VARCHAR(32),          #用户名
   upwd VARCHAR(32),	          #用户密码
-  phone VARCHAR(16),          #用户号码
+  phone CHAR(11),          #用户号码
   score INT,                  #用户积分
-  avatar VARCHAR(128),        #头像图片路径
   user_name VARCHAR(32),      #用户真实姓名，如王小明
-  gender INT                  #性别  0-女  1-男
+  gender INT,                  #性别  0-女  1-男
+  u_img VARCHAR(128)           #用户头像
 );
 
 /**收货地址信息**/
@@ -157,9 +158,6 @@ CREATE TABLE index_carousel(
 );
 
 /****数据导入****/
-INSERT INTO user VALUES
-(NULL, 'dingding', '123456', '13501234567','4100','img/avatar/default.png', '丁伟', '1'),
-(NULL, 'dangdang', '123456', '13501234568','1200','img/avatar/default.png', '林当', '0');
 INSERT INTO index_carousel VALUES
 (NULL, 'http://127.0.0.1:8080/index/c1.png','轮播广告商品1'),
 (NULL, 'http://127.0.0.1:8080/index/c2.png','轮播广告商品2'),
@@ -229,21 +227,24 @@ INSERT INTO product_brand VALUES
 (NULL,"LIADE","http://127.0.0.1:8080/brand/brand01.png","美国","http://127.0.0.1:8080/country/mg.png",80);
 
 INSERT INTO product VALUES
-(1,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
-(NULL,"西西猫猫粮","可可爱爱想睡觉","45.9","45.9","http://127.0.0.1:8080/index/activity_01.png",101,101,10,true),
-(NULL,"奶油味猫粮","可可爱爱想睡觉","66","66","http://127.0.0.1:8080/index/activity_02.png",101,102,10,false),
-(NULL,"泰国原装金枪鱼罐头","可可爱爱想睡觉","120.0","120.0","http://127.0.0.1:8080/index/activity_03.png",107,103,14,false),
-(NULL,"香薰味猫砂","可可爱爱想睡觉","64.5","64.5","http://127.0.0.1:8080/index/pro_01.png",110,NULL,15,true),
-(NULL,"猫猫掏耳朵神器","可可爱爱想睡觉","26","26","http://127.0.0.1:8080/index/pro_01.png",104,NULL,18,false),
-(NULL,"可爱猫猫小背心","可可爱爱想睡觉","77","77","http://127.0.0.1:8080/index/pro_01.png",117,NULL,19,true),
-(NULL,"猫猫可爱爬架","可可爱爱想睡觉","64.22","64.22","http://127.0.0.1:8080/index/pro_01.png",126,NULL,21,true),
-(NULL,"有趣逗猫棒","可可爱爱想睡觉","71","71","http://127.0.0.1:8080/index/pro_01.png",127,NULL,23,false),
-(NULL,"猫猫强力驱虫药","可可爱爱想睡觉","35.6","35.6","http://127.0.0.1:8080/index/pro_01.png",130,NULL,25,true),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,false),
-(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false);
+(1,"软萌可爱的蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,1456),
+(NULL,"西西猫猫粮","可可爱爱想睡觉","45.9","45.9","http://127.0.0.1:8080/index/activity_01.png",101,101,10,true,229),
+(NULL,"奶油味猫粮","可可爱爱想睡觉","66","66","http://127.0.0.1:8080/index/activity_02.png",101,102,10,false,667),
+(NULL,"泰国原装金枪鱼罐头","可可爱爱想睡觉","120.0","120.0","http://127.0.0.1:8080/index/activity_03.png",107,103,14,false,494),
+(NULL,"香薰味猫砂","可可爱爱想睡觉","64.5","64.5","http://127.0.0.1:8080/index/pro_01.png",110,NULL,15,true,12587),
+(NULL,"猫猫掏耳朵神器","可可爱爱想睡觉","26","26","http://127.0.0.1:8080/index/pro_01.png",104,NULL,18,false,1547),
+(NULL,"可爱猫猫小背心","可可爱爱想睡觉","77","77","http://127.0.0.1:8080/index/pro_01.png",117,NULL,19,true,8569),
+(NULL,"猫猫可爱爬架","可可爱爱想睡觉","64.22","64.22","http://127.0.0.1:8080/index/pro_01.png",126,NULL,21,true,5698),
+(NULL,"有趣逗猫棒","可可爱爱想睡觉","71","71","http://127.0.0.1:8080/index/pro_01.png",127,NULL,23,false,78),
+(NULL,"猫猫强力驱虫药","可可爱爱想睡觉","35.6","35.6","http://127.0.0.1:8080/index/pro_01.png",130,NULL,25,true,159),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,548),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,false,254),
+(NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,954),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,123),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,14785),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,456),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,78);
+
+INSERT INTO user VALUES
+(NULL,"张不高","123456","18102558028",NULL,"李梅梅",0,"http://127.0.0.1:8080/login/3.jpg");

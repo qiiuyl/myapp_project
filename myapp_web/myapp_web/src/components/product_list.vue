@@ -1,31 +1,25 @@
 <template>
   <div id="container">
-    <productItem></productItem>
-    <productItem></productItem>
-    <productItem></productItem>
-    <productItem></productItem>
-    <productItem></productItem>
-    <productItem></productItem>
+    <productItem v-for="(item,index) of proMsg" :key="index" :item=item :index=index></productItem>
   </div>
 </template>
 <script>
   import product_item from './product_item';
   export default{
+    data(){
+      return{
+      }
+    },
+    props:['proMsg'],
     components:{
       "productItem":product_item
     },
-    methods:{
-      getProductInfo(){
-        
-      }
-    }
   }
 </script>
 <style scoped>
   #container{
     box-sizing:border-box;
     width:100%;
-    background:rgb(238,238,224);
     padding:0.5rem 0;
   }
 </style>
