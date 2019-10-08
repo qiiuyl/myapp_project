@@ -1,14 +1,17 @@
 <template>
   <div class="bgcolor">
+    <div id="load">
+      <van-loading size="24px" v-if="loading==1">加载中...</van-loading>
+    </div>
     <div id="header">
       <ul>
         <li>
-          <img src="http://127.0.0.1:8080/search/return.png" alt />
+          <img src="http://127.0.0.1:8080/search/return.png" @click="indexUrl"/>
         </li>
         <li>
           <input type="text" v-model="keyWord" placeholder="搜索" ref="inputMsg" />
         </li>
-        <li @click="getKeyWord()">
+        <li @click="change('recommend')">
           <img src="http://127.0.0.1:8080/search/search.png" alt />
         </li>
       </ul>
@@ -19,7 +22,7 @@
           <div v-if="item.label">{{item.label}}</div>
           <div :id="item.btnId || null" v-if="item.img&&item.img.length>0">
             <!-- item.img是为了遍历不到img的时候不会报找不到length的错误 -->
-            <button v-for="(iv,i) in item.img" :key="i">
+            <button v-for="(iv,i) in item.img" :key="i" @click="index=='prices'?getProMsg(index,i):''">
               <img :src="iv.src" :alt="iv.src" />
             </button>
           </div>
@@ -28,7 +31,7 @@
     </div>
     <div id="clear"></div>
     <div>
-      <productlist :proMsg="searchDefault"></productlist>
+      <productlist :proMsg="searchMsg"></productlist>
     </div>
   </div>
 </template>
@@ -62,7 +65,8 @@ export default {
         }
       },
       keyWord: "",
-      searchDefault: []
+      searchMsg: [],
+      loading:"0",
     };
   },
   components: {
@@ -72,29 +76,43 @@ export default {
     this.$refs.inputMsg.focus();
   },
   methods: {
-    getKeyWord() {//按照默认的推荐方法排列
+    getProMsg(keyWay, priceWay) {
+      //按照默认的推荐方法排列
       var keyword = this.keyWord;
-      if(keyword==""){
-        this.$toast("您输入查询内容为空！")
-      }else{
-      this.change("recommend");//使点击搜索的按钮的时候，商品列表始终按照推荐排序
-      this.axios
-        .get("/product/searchDefault", { params: { keyword } })
-        .then(res => {
-          this.searchDefault = res.data;
-        }); 
-      }
-    },
-    getKeyWordSales(){//按照销量的高低排列
-      var keyword = this.keyWord;
-      if(keyword==""){
-        this.$toast("您输入查询内容为空！")
-      }else{
-      this.axios
-        .get("/product/searchSales", { params: { keyword } })
-        .then(res => {
-          this.searchDefault = res.data;
-        }); 
+      if (keyword == "") {
+        this.$toast("您输入查询内容为空！");
+      } else {
+        if (keyWay == "recommend") {
+          this.loading="1"
+          let way = "default";
+          var obj = { keyword, way };
+          this.axios.get("/product/searchMsg", { params: obj }).then(res => {
+            this.searchMsg = res.data;
+          }).then(this.loading="0");
+        } else if (keyWay == "sales") {
+          this.loading="1"
+          let way = "sales";
+          var obj = { keyword, way };
+          this.axios.get("/product/searchMsg", { params: obj }).then(res => {
+            this.searchMsg = res.data;
+          }).then(this.loading="0");
+        } else if (keyWay == "prices") {
+          if (priceWay == 0) {
+            this.loading="1"
+            let way = "up";
+            var obj = { keyword, way };
+            this.axios.get("/product/searchMsg", { params: obj }).then(res => {
+              this.searchMsg = res.data;
+            }).then(this.loading="0");
+          }else if(priceWay == 1){
+            this.loading="1"
+            let way = "down";
+            var obj = { keyword, way };
+            this.axios.get("/product/searchMsg", { params: obj }).then(res => {
+              this.searchMsg = res.data;
+            }).then(this.loading="0");
+          }
+        }
       }
     },
     change(index) {
@@ -102,36 +120,33 @@ export default {
         if (index == key) {
           this.$refs[index][0].style.color = "#666";
           this.$refs[index][0].style.borderBottom = "2px solid #ffe971";
-          if(index=="recommend"){
-            this.getKeyWord();
-          }
-          if(index=="sales"){
-            this.getKeyWordSales()
-          }
-          if(index=="prices"){
-            
-          }
           if (index == "select") {
             this.list["select"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/select.png";
             this.list["type"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/untype.png";
+            this.$router.push("../type")
           } else if (index == "type") {
             this.list["type"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/type.png";
             this.list["select"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/unselect.png";
+            this.getProMsg(index);
           } else {
             this.list["select"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/unselect.png";
             this.list["type"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/untype.png";
+            this.getProMsg(index);
           }
         } else {
           this.$refs[key][0].style.color = "#bfbfbf";
           this.$refs[key][0].style.borderBottom = "";
         }
       }
+    },
+    indexUrl(){
+      this.$router.push("index")
     }
   }
 };
@@ -240,5 +255,11 @@ export default {
   outline: none;
   padding: 0;
   margin: 0;
+}
+#load{
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform: translate(-56px,-12px);
 }
 </style>

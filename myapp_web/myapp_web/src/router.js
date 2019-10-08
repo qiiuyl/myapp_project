@@ -6,6 +6,8 @@ import index from './views/index.vue'
 import search from './views/search.vue'
 import product_item from './components/product_item.vue'
 import product_list from './components/product_list.vue'
+import type  from './components/type.vue'
+import prodetail from './views/proDetail.vue'
 
 Vue.use(Router)
 
@@ -17,5 +19,7 @@ export default new Router({
     {path: '/search',component:search},
     {path: '/productItem',component:product_item},
     {path: '/productList',component:product_list},
+    {path: '/type',component:type},
+    {path: '/prodetail',component:prodetail},
   ]
 })

@@ -11,26 +11,26 @@ Vue.use(MintUI)
 //引入滑动事件模块
 import VueTouch from 'vue-touch'
 //注册vue-touch
-Vue.use(VueTouch,{name:'v-touch'})
+Vue.use(VueTouch, { name: 'v-touch' })
 //配置vue-touch
-VueTouch.config.swipe={
-  threshold:10//手指滑动的距离
+VueTouch.config.swipe = {
+  threshold: 10//手指滑动的距离
 }
 //配置axios
 //引入axios
 import axios from "axios"
 //配置请求时保存session信息,允许携带cookie发送请求
-axios.default.withCredentials=true
+axios.default.withCredentials = true
 //配置请求的基础路径
-axios.defaults.baseURL="http://127.0.0.1:8080"
+axios.defaults.baseURL = "http://127.0.0.1:8080"
 //注册
-Vue.prototype.axios=axios;//前面的vue必须大写
+Vue.prototype.axios = axios;//前面的vue必须大写
 //引入qs模块
 import qs from 'qs'
-Vue.prototype.qs=qs;
+Vue.prototype.qs = qs;
 
-import { NavBar,Button,Image,Cell, CellGroup } from 'vant';
-Vue.use(NavBar).use(Button).use(Image).use(Cell).use(CellGroup);
+import { NavBar, Button, Image, Cell, CellGroup, Loading, Swipe, SwipeItem } from 'vant';
+Vue.use(NavBar).use(Button).use(Image).use(Cell).use(CellGroup).use(Loading).use(Swipe).use(SwipeItem);
 
 Vue.config.productionTip = false
 

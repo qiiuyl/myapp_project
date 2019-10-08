@@ -17,8 +17,10 @@
     <div id="kingkong">
       <ul class="kingkong_ul">
         <li v-for="(item,index) of kingkong" :key=index>
-          <img :src=kingkong[index].icon :alt=kingkong[index].pb_tname>
-          <p>{{kingkong[index].pb_tname}}</p>
+          <button  @click="getType(item.pb_tname)">
+            <img :src=item.icon :alt=item.pb_tname>
+            <p>{{item.pb_tname}}</p>
+          </button>
         </li>
       </ul>
     </div>
@@ -154,6 +156,9 @@
         this.axios.get(url).then(res=>{
           this.like_product=this.like_product.concat(res.data)
         })
+      },
+      getType(item){
+        this.$router.push("type")
       }
     }
   }
@@ -230,6 +235,11 @@
     padding-left:0;
     flex-wrap:wrap;
     margin:0;
+  }
+  #kingkong .kingkong_ul button{
+    outline:none;
+    border:none;
+    background:none;
   }
   #kingkong .kingkong_ul li{
     width:25%;

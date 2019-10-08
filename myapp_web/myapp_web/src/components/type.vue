@@ -3,7 +3,7 @@
     <div id="header">
       <mt-header fixed>
         <mt-button slot="left">分类</mt-button>
-        <mt-button slot="right" class="btn_img">
+        <mt-button slot="right" class="btn_img" @click.native="SearchUrl">
           <img src="http://127.0.0.1:8080/type/search.png">
         </mt-button>
       </mt-header>
@@ -13,7 +13,7 @@
       <div id="bigtype">
         <ul v-if="kingkong.length>0">
           <li v-for="(item,index) of kingkong" :key="index" >
-            <button @touchstart="addhr($event,index)">{{kingkong[index].pb_tname}}</button>
+            <button @touchstart="addhr($event,index)">{{item.pb_tname}}</button>
             <hr :data-id=index>
           </li>
         </ul>
@@ -109,6 +109,9 @@ export default {
       this.axios.get(url,{params:{name:"品质猫粮"}}).then(res=>{
       this.brand=res.data;
       })
+    },
+    SearchUrl(){
+      this.$router.push("search")
     }
   }
 }
