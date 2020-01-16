@@ -125,7 +125,7 @@ export default {
               "http://127.0.0.1:8080/search/select.png";
             this.list["type"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/untype.png";
-            this.$router.push("../type")
+            this.$router.push("../type/品质猫粮")
           } else if (index == "type") {
             this.list["type"]["img"][0]["src"] =
               "http://127.0.0.1:8080/search/type.png";

@@ -17,10 +17,10 @@
     <div id="kingkong">
       <ul class="kingkong_ul">
         <li v-for="(item,index) of kingkong" :key=index>
-          <button  @click="getType(item.pb_tname)">
+          <router-link :to="{path:'/type/'+item.pb_tname}">
             <img :src=item.icon :alt=item.pb_tname>
             <p>{{item.pb_tname}}</p>
-          </button>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -40,12 +40,12 @@
         </div>
       </div>
     </div>
+
     <div id="good_product">
       <h5>好物说</h5>
         <div id="product">
-          <v-touch v-on:swipeleft="onSwipeLeft" v-on:swiperight="onSwipeRight">
-            <div id="product_item" ref="product_item">
-              <div id="item_content" v-for="(item,index) of good_product" :key="index">
+            <div id="product_item" ref="product_item" @touchstart="startSlide" @touchmove="slide($event,'item_content','product_item')" @touchend="slideEnd">
+              <div id="item_content" ref="item_content" v-for="(item,index) of good_product" :key="index">
                 <img :src=good_product[index].p_img alt="">
                 <div id="content">
                   <p>{{good_product[index].p_name}}</p>
@@ -54,21 +54,20 @@
                 </div>
               </div>
             </div>
-          </v-touch>
         </div>
     </div>
-    <div id="like_product">
+
+    <div id="like_product" ref="like_product">
         <h5>猜你喜欢</h5>
-        <v-touch v-on:swipeleft="onSwipeLeft1" v-on:swiperight="onSwipeRight1">
-          <div id="like_list" ref="like_list">
-            <div id="like_item" v-for="(item,index) of like_product " :key="index">
+          <div id="like_list" ref="like_list" @touchstart="startSlide" @touchmove="slide($event,'like_item','like_list')" @touchend="slideEnd">
+            <div ref="like_item" id="like_item" v-for="(item,index) of like_product " :key="index">
               <img :src=like_product[index].p_img alt=like_product[index].p_title>
               <span>{{like_product[index].p_name}}</span>
               <p><span>￥</span>{{like_product[index].p_price}}</p>
             </div>
           </div>
-        </v-touch>
     </div>
+
   </div>
 </template>
 <script>
@@ -82,6 +81,12 @@
         act_product:[],
         good_product:[],
         like_product:[],
+        touchData:{
+          startX:0,
+          len:0,
+          end:0,
+          slidedLen:0//已经滑动了的距离
+        }
       }
     },
     created(){
@@ -93,34 +98,33 @@
       this.getlike_product();
     },
     methods:{
-      onSwipeLeft(){
-        if(this.ml>-40){
-        this.ml-=20;
-        this.$refs.product_item.style.marginLeft=`${this.ml}%`;
-        this.$refs.product_item.style.transition="margin 0.5s linear"
-        }
+      startSlide(e){
+        this.touchData.startX=e.targetTouches[0].clientX;//获取到当前鼠标的位置并且记录
       },
-      onSwipeRight(){
-        if(this.ml<0){
-          this.ml+=20;
-          this.$refs.product_item.style.marginLeft=`${this.ml}%`;
-          this.$refs.product_item.style.transition="margin 0.5s linear"
+      slide(e,slideRef,parentRef){
+        let endX= e.targetTouches[0].clientX;//记录移动的最后的点位置
+        this.touchData.len=endX-this.touchData.startX;//用最后位置－开始位置，获取移动距离
+        let arr=this.$refs[slideRef];//获取当前列表中的每一个商品，得到一个元素数组
+        let divWidth=arr[0].offsetWidth;//获取其中任意一个元素的宽度
+        let divMargin=parseFloat(window.getComputedStyle(arr[0]).marginRight);//获取每一个元素的margin的值，并且转换成数字格式
+        let allWidth=divWidth*(arr.length)+(divMargin*arr.length-1);//把全部item的宽+它们的margin-最后一个item的margin，得到总体的宽
+        let BigdivWidth=this.$refs[parentRef].offsetWidth;
+        let addSlide=this.touchData.len+this.touchData.slidedLen;//总共移动的距离
+        if(parentRef=='product_item'){
+          if(addSlide<0 && addSlide>-243  || addSlide>0 && addSlide<2){
+            this.$refs[parentRef].style.transform=`translateX(${addSlide}px)`
+          }
+        }else if(parentRef=='like_list'){
+          if(addSlide<0 && addSlide>-(allWidth-BigdivWidth)  || addSlide>0 && addSlide<2){
+            this.$refs[parentRef].style.transform=`translateX(${addSlide}px)`
+          }
         }
+        
       },
-      onSwipeLeft1(){
-        if(this.ml>-100){
-        this.ml-=20;
-        this.$refs.like_list.style.marginLeft=`${this.ml}%`;
-        this.$refs.like_list.style.transition="margin 0.5s linear"
-        }
+      slideEnd(e){
+        this.touchData.slidedLen+=this.touchData.len;
       },
-      onSwipeRight1(){
-        if(this.ml<0){
-          this.ml+=20;
-          this.$refs.like_list.style.marginLeft=`${this.ml}%`;
-          this.$refs.like_list.style.transition="margin 0.5s linear"
-        }
-      },
+
       getbanner(){
         var url="/product/banner";
         this.axios.get(url).then(res=>{
@@ -156,9 +160,6 @@
         this.axios.get(url).then(res=>{
           this.like_product=this.like_product.concat(res.data)
         })
-      },
-      getType(item){
-        this.$router.push("type")
       }
     }
   }
@@ -236,10 +237,11 @@
     flex-wrap:wrap;
     margin:0;
   }
-  #kingkong .kingkong_ul button{
+  #kingkong .kingkong_ul a{
     outline:none;
     border:none;
     background:none;
+    color:#333;
   }
   #kingkong .kingkong_ul li{
     width:25%;
@@ -384,17 +386,19 @@
     height:12rem;
   }
   #like_product #like_list{
-    width:200%;
+    /* width:200%; */
     height:100%;
     display:flex;
     justify-content:space-between;
+    flex-wrap: nowrap;
   }
   #like_product #like_list #like_item{
     display:flex;
     align-items:center;
     flex-direction: column;
-    width:15%;
+    width:12rem;
     height:100%;
+    margin-right:2rem;
   }
   #like_product #like_list #like_item>span{
     display:block;

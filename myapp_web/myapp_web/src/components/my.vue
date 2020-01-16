@@ -1,23 +1,27 @@
 <template>
   <div id="bg" :style="Height">
-    <div id="header">
-      <van-nav-bar title="我的" right-text="编辑" left-arrow />
-    </div>
     <div id="msg">
-      <van-image round width="5rem" height="5rem" src="https://img.yzcdn.cn/vant/cat.jpeg" />
-      <p class="product-price">养猫少女</p>
-      <p>积分 1024</p>
+      <router-link to='login' class="msg_img">
+        <van-image
+          round
+          width="5rem"
+          height="5rem"
+          :src="userMsg['code']?'http://localhost:8080/my/unlogin.png':userMsg[0]['u_img']"
+        />
+      </router-link>
+      <p class="product-price"><router-link to='login'>{{userMsg['code']?'未登录':userMsg[0]['uname']}}</router-link></p>
+      <p>积分{{userMsg['code']?0:userMsg[0].score}}</p>
       <div class="info">
         <p>
-          <span class="product-price">2</span>
+          <span class="product-price">0</span>
           <span>优惠券</span>
         </p>
         <p>
-          <span class="product-price">34</span>
+          <span class="product-price">0</span>
           <span>收藏夹</span>
         </p>
         <p>
-          <span class="product-price">45</span>
+          <span class="product-price">0</span>
           <span>足迹</span>
         </p>
       </div>
@@ -52,14 +56,10 @@
       </div>
     </div>
     <div id="user-server">
-      <van-cell title="联系客服" icon="http://127.0.0.1:8080/my/kf.png" is-link> 
-      </van-cell>
-      <van-cell title="收货地址" icon="http://127.0.0.1:8080/my/dz.png" is-link>
-      </van-cell>
-      <van-cell title="售后服务" icon="http://127.0.0.1:8080/my/shouhou.png" is-link>
-      </van-cell>
-      <van-cell title="设置" icon="http://127.0.0.1:8080/my/sz.png" is-link>
-      </van-cell>
+      <van-cell title="联系客服" icon="http://127.0.0.1:8080/my/kf.png" is-link></van-cell>
+      <van-cell title="收货地址" icon="http://127.0.0.1:8080/my/dz.png" is-link></van-cell>
+      <van-cell title="售后服务" icon="http://127.0.0.1:8080/my/shouhou.png" is-link></van-cell>
+      <van-cell title="设置" icon="http://127.0.0.1:8080/my/sz.png" is-link></van-cell>
     </div>
   </div>
 </template>
@@ -67,25 +67,6 @@
 #bg {
   background: rgb(238, 238, 224);
   width: 100%;
-}
-#header {
-  width: 100%;
-  height: 5.5%;
-}
-#header .van-nav-bar {
-  height: 100%;
-  background: #ffe971;
-  border: 0;
-  outline: 0;
-}
-#header .van-nav-bar .van-icon,
-#header .van-nav-bar__text {
-  color: #777;
-  font-weight: 600;
-}
-#header .van-nav-bar__title {
-  font-size: 1.3rem;
-  font-weight: 600;
 }
 #msg {
   height: 30%;
@@ -95,6 +76,10 @@
   align-items: center;
   padding: 5% 0;
   box-sizing: border-box;
+}
+#msg .msg_img {
+  width: 5rem;
+  height: 5rem;
 }
 #msg p {
   margin: 0px;
@@ -137,28 +122,29 @@
   color: #666;
   font-weight: 600;
 }
-#user-server{
-  height:25%;
-  display:flex;
+#user-server {
+  height: 25%;
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
-  background:#fff;
-  margin-top:3%;
+  background: #fff;
+  margin-top: 3%;
 }
-#user-server .van-cell__left-icon{
+#user-server .van-cell__left-icon {
   font-size: 24px;
 }
-#user-server .van-cell__title{
+#user-server .van-cell__title {
   font-size: 18px;
   font-weight: 600;
-  color:#666;
+  color: #666;
 }
 </style>
 <script>
 export default {
   data() {
     return {
-      Height: { height: "0" }
+      Height: { height: "0" },
+      userMsg: [{ code: 0 }]
     };
   },
   mounted() {
@@ -170,10 +156,23 @@ export default {
       var h = window.innerHeight;
       this.Height.height = h + "px";
     },
-    getUserMsg(){
-      this.axios.get("/user/userMsg").then(res=>{
-        console.log(res)
-      })
+    getUserMsg() {
+      this.axios.get("/user/userMsg").then(res => {
+        if (res.data.code == -1) {
+          this.$dialog.confirm({
+            title: "您还未登录，是否前往登录"
+          })
+            .then(() => {
+              this.$router.push('login')
+              this.userMsg = res.data;
+            })
+            .catch(() => {
+              this.userMsg = res.data;
+            });
+        }else{
+          this.userMsg = res.data;
+        }
+      });
     }
   }
 };

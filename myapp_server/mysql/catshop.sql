@@ -227,7 +227,7 @@ INSERT INTO product_brand VALUES
 (NULL,"LIADE","http://127.0.0.1:8080/brand/brand01.png","美国","http://127.0.0.1:8080/country/mg.png",80);
 
 INSERT INTO product VALUES
-(1,"软萌可爱的蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,1456),
+(1,"可爱的蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,1456),
 (NULL,"西西猫猫粮","可可爱爱想睡觉","45.9","45.9","http://127.0.0.1:8080/index/activity_01.png",101,101,10,true,229),
 (NULL,"奶油味猫粮","可可爱爱想睡觉","66","66","http://127.0.0.1:8080/index/activity_02.png",101,102,10,false,667),
 (NULL,"泰国原装金枪鱼罐头","可可爱爱想睡觉","120.0","120.0","http://127.0.0.1:8080/index/activity_03.png",107,103,14,false,494),
@@ -240,11 +240,15 @@ INSERT INTO product VALUES
 (NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,548),
 (NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,false,254),
 (NULL,"蜜蜂款猫窝","可可爱爱想睡觉","9.9","19.9","http://127.0.0.1:8080/index/pro_01.png",124,104,21,true,954),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,123),
+(NULL,"【Royal Canin】幼猫粮 1kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,123),
 (NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,14785),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,456),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
-(NULL,"【Royal Canin】幼猫粮 2kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,78);
+(NULL,"【Royal Canin】幼猫粮 3kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,true,456),
+(NULL,"【Royal Canin】幼猫粮 4kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 5kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 6kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 7kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 8kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,62),
+(NULL,"【Royal Canin】幼猫粮 9kg",NULL,"128","128","http://127.0.0.1:8080/index/like_01.png",101,105,10,false,78);
 
 INSERT INTO user VALUES
-(NULL,"张不高","123456","18102558028",NULL,"李梅梅",0,"http://127.0.0.1:8080/login/3.jpg");
+(NULL,"张不高","123456","18102558028",185,"李梅梅",0,"http://127.0.0.1:8080/login/3.jpg");

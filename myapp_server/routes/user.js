@@ -42,7 +42,7 @@ router.post("/login",(req,res)=>{
         if(err) throw err;
         if(result.length>0){
             var id=result[0].uid;
-            req.session.uid=id;
+            req.session.uid=id;//往session里面存储值
             res.send({code:1,msg:"登录成功"})
         }else{
             res.send({code:-1,msg:"登录失败"})
@@ -60,7 +60,8 @@ router.get("/userMsg",(req,res)=>{
     var sql="SELECT * FROM user WHERE uid=?"
     pool.query(sql,[uid],(err,result)=>{
         if(err) throw err;
-        console.log(result);
+        console.log(result)
+        res.send(result);
     })
 })
 

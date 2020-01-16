@@ -6,7 +6,7 @@
           <div id="clear"></div>
        </mt-tab-container-item>
        <mt-tab-container-item id="type">
-          <type></type>
+          <type :name=typeName></type>
        </mt-tab-container-item>
        <mt-tab-container-item id="shopcar">
           购物车
@@ -45,6 +45,7 @@
     data(){
       return{
         active:"fontindex",
+        typeName:"品质猫粮"
       }
     },
     components:{

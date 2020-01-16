@@ -1,6 +1,5 @@
 const express = require('express');
 const session = require("express-session");
-const cors = require("cors");
 //引入body-parser中间件
 const bodyParser=require('body-parser');
 //引入用户路由器
@@ -11,15 +10,6 @@ const proRouter=require('./routes/product.js')
 var app=express();
 //监听端口
 app.listen(8080);
-//5:处理跨域 cors 
-//5.1：配置允许访问程序地址(脚手架)
-//     http://127.0.0.1:5050  (ok)
-//     http://localhost:5050
-//5.2:每请求是否验证true
-app.use(cors({
-  origin:["http://localhost:8081","http://localhost:8080","http://192.168.16.110:8081"],
-  credentials:true
-}))
 //6:配置session
 //#session配置一定要在所有请求之前
 app.use(session({

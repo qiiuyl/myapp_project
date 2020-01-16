@@ -11,3 +11,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 </style>
+<script>
+export default {
+  data(){
+    return{
+
+    }
+  },
+  components:{
+  }
+}
+</script>

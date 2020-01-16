@@ -1,7 +1,7 @@
 <template>
     <div :style="Height" id="bg">
         <div id="header"> 
-            <van-nav-bar right-text="去注册" @click-right="onClickRight" left-arrow/>
+            <van-nav-bar right-text="去注册" @click-left="onClickLeft" @click-right="onClickRight" left-arrow/>
         </div>
         <div class="title">Hi~ 欢迎来到猫猫说</div>
         <div id="container"> 
@@ -105,10 +105,12 @@
             getH(){
                 var h=window.innerHeight;
                 this.Height.height=h+'px';
-                console.log(this.Height.height)
             },
             onClickRight(){
                 this.$router.push("./register")
+            },
+            onClickLeft(){
+                this.$router.push('./index')
             },
             regLogin(){
                 if(this.uname==""){

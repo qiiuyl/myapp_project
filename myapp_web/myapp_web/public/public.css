@@ -15,10 +15,14 @@
 .product-price{
     font-size:1.5rem;
     font-weight:600;
+    color:#333;
 }
 /* 商品描述 */
 .product-describe{
     font-size:0.75rem;
     color:#888;
+}
+a{
+    color:#333;
 }
 
